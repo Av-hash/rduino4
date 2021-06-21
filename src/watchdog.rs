@@ -26,12 +26,7 @@ impl Watchdog {
             __nop();
             core::ptr::write_volatile(&mut self.unlock,0xD928 );
             __nop();
-            // Disable the watchdog. This has 2 parts, unlocking the watchdog for modification and then disabling the watchdog.
-            // See section 23.3.1 for unlocking the watchdog. Ignore point 3 there.
-            // To disable the watchdog, see section 23.7.1 and scroll down to the last item in the table the 0th bit to understand how to disable the watchdog. This makes it clear that your operation should only change the 0th bit in the 16-bit value, keeping others same. How would you do that? (Think XOR,AND,OR etc.)
-            // If you did not understand writing then simply to write 0x01 at strctrl register we simply do
-         //   core::ptr::write_volatile(&mut self.stctrlh, 0x01);
-            // To read the value we do
+            
             core::arch::arm::__nop();
             let mut ctrl = core::ptr::read_volatile(&self.stctrlh);
            // ctrl= (~((~ctrl) | (0x01)));

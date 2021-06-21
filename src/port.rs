@@ -131,9 +131,15 @@ impl Gpio {
     pub fn high(&mut self) {
         unsafe {
             let gpio:*mut GpioBitBand=self.gpio;
-           (*gpio).PDOR=1>>self.pin;
+           (*gpio).PDOR=1<<self.pin;
            //  WRITE THE  XX register of GPIO to 1 to set this pin as high.
            // See section 49.2 of the teensy manual to find out what is XX. Please not that it is not PDOR, since PDOR is never directly written.
+        }
+    }
+    pub fn high(&mut self) {
+        unsafe {
+            let gpio:*mut GpioBitBand=self.gpio;
+           (*gpio).PDOR=0<<self.pin;
         }
     }
 }

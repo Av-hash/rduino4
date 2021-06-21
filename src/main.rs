@@ -20,7 +20,9 @@ pub extern "C" fn main() {
    let gpio:Gpio=pin.make_gpio(self);
    
     loop {
-       
+       gpio.high();
+       delay(1000);
+       gpio.low();
     }
 }
 
